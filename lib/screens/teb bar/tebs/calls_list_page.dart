@@ -19,20 +19,22 @@ class CallsListPage extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () async {
-              final url = Uri(
-                scheme: 'tel',
-                path: providerTrue.contentList[index].number.toString(),
+              Uri uri = Uri.parse(
+                'tel: ${providerTrue.contentList[index].number}',
               );
-              if (await canLaunchUrl(url)) {
-                launchUrl(url);
-              }
+              launchUrl(uri);
             },
             child: Card(
               color: Colors.blue.shade50,
               child: ListTile(
                 leading: IconButton(
                   /// todo logic URL loch
-                  onPressed: () {},
+                  onPressed: () async {
+                    Uri uri = Uri.parse(
+                      'tel: ${providerTrue.contentList[index].number}',
+                    );
+                    launchUrl(uri);
+                  },
                   icon: Icon(Icons.call),
                 ),
                 title: Text(

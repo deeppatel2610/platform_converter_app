@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../controller/home_provider.dart';
 
@@ -13,18 +14,27 @@ class ChatsListPage extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        /// todo logic URL loch
-        onTap: () {},
-        child: ListView.builder(
-          itemCount: providerTrue.contentList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
+      child: ListView.builder(
+        itemCount: providerTrue.contentList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () {
+              Uri uri = Uri.parse(
+                'mailto: ${providerTrue.contentList[index].email}',
+              );
+              launchUrl(uri);
+            },
+            child: Card(
               color: Colors.blue.shade50,
               child: ListTile(
                 leading: IconButton(
                   /// todo logic URL loch
-                  onPressed: () {},
+                  onPressed: () {
+                    Uri uri = Uri.parse(
+                      'mailto: ${providerTrue.contentList[index].email}',
+                    );
+                    launchUrl(uri);
+                  },
                   icon: Icon(Icons.email_outlined),
                 ),
                 title: Text(
@@ -42,9 +52,9 @@ class ChatsListPage extends StatelessWidget {
                   ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

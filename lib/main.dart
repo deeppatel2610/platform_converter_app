@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
       create: (context) => ProviderController(),
       builder: (context, child) {
         Provider.of<ProviderController>(context, listen: false).readUserData();
+        Provider.of<ProviderController>(context, listen: false).readDataBase();
 
         return (Provider.of<ProviderController>(context, listen: true).isIos)
             ? CupertinoApp(home: Temp())
