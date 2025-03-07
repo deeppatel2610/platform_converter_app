@@ -37,6 +37,64 @@ class ProviderController extends ChangeNotifier {
     "Flip to Silence",
   ];
 
+  DateTime? selectedDate; // for DA
+  DateTime? selectedCupertinoTime; // for DA
+  String? contactDate; // TE
+  String? contactTime; // TE
+  TimeOfDay? selectedTime; //FO
+
+  Future<void> datePickerCupertino(BuildContext context) async {
+    await showCupertinoModalPopup(
+      context: context,
+      builder:
+          (context) => Container(
+            height: 216,
+            padding: const EdgeInsets.only(top: 6.0),
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            color: CupertinoColors.systemBackground.resolveFrom(context),
+            child: CupertinoDatePicker(
+              initialDateTime: DateTime.now(),
+              mode: CupertinoDatePickerMode.date,
+              use24hFormat: true,
+              showDayOfWeek: true,
+              onDateTimeChanged: (value) {
+                selectedDate = value;
+              },
+            ),
+          ),
+    );
+    contactDate =
+        "${selectedDate!.month} / ${selectedDate!.day} / ${selectedDate!.year}";
+
+    notifyListeners();
+  }
+
+  Future<void> timePickerCupertino(BuildContext context) async {
+    await showCupertinoModalPopup(
+      context: context,
+      builder:
+          (context) => Container(
+            height: 216,
+            padding: const EdgeInsets.only(top: 6.0),
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            color: CupertinoColors.systemBackground.resolveFrom(context),
+            child: CupertinoDatePicker(
+              initialDateTime: DateTime.now(),
+              mode: CupertinoDatePickerMode.time,
+              onDateTimeChanged: (value) {
+                selectedCupertinoTime = value;
+              },
+            ),
+          ),
+    );
+    contactTime =
+        '${selectedCupertinoTime!.hour}:${selectedCupertinoTime!.minute}';
+  }
+
   //// todo : -------------------------- db logic ---------------------------
 
   //// todo : all content logic
