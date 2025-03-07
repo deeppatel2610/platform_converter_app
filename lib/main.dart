@@ -6,7 +6,7 @@ import 'package:platform_converter_app/screens/add_user_page.dart';
 import 'package:platform_converter_app/screens/teb%20bar/teb_bar.dart';
 import 'package:platform_converter_app/screens/teb%20bar/tebs/settings%20page/content_page.dart';
 import 'package:platform_converter_app/screens/teb%20bar/tebs/settings%20page/edit_profile_page.dart';
-import 'package:platform_converter_app/screens/temp.dart';
+import 'package:platform_converter_app/view/cupertino_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -37,7 +37,10 @@ class _MyAppState extends State<MyApp> {
         Provider.of<ProviderController>(context, listen: false).readDataBase();
 
         return (Provider.of<ProviderController>(context, listen: true).isIos)
-            ? CupertinoApp(home: Temp())
+            ? CupertinoApp(
+              home: CupertinoFormPage(),
+              debugShowCheckedModeBanner: false,
+            )
             : MaterialApp(
               routes: {
                 '/':
